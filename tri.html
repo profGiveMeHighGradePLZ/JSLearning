@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .price {
+            width: 170px;
+            height: 24px;
+            background-color: #eee;
+            line-height: 24px;
+            border: 1px solid red;
+        }
+
+        .discount {
+            position: relative;
+            float: left;
+            width: 105px;
+            background-color: red;
+            text-align: center;
+            color: #eee;
+            font-weight: 900;
+            margin-right: 8px;
+            font-size: 17px;
+        }
+
+        .tri {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-color: transparent #eee transparent transparent;
+            border-style: solid;
+            border-width: 24px 10px 0 0;
+        }
+
+        .original {
+            text-decoration: line-through;
+            font-size: 14px;
+            color: gray;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        /* input::placeholder {
+            color: pink;
+        } */
+
+        input[value] {
+            color: aquamarine;
+        }
+
+        input[class^=eee] {
+            color: blue;
+        }
+
+        ul li:first-child {
+            color: antiquewhite;
+        }
+        ul li:last-child {
+            color: aqua;
+        }
+
+        ul li:nth-child(odd) {
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div class="price">
+        <span class="discount">¥1999<i class="tri"></i></span>
+        <span class="original">¥5999</span>
+    </div>
+    <!-- <video src="" autoplay="autoplay" muted="muted" controls="controls" loop="loop" poster=""></video> -->    
+    <!-- <audio src="" autoplay="autoplay" controls="controls" loop="loop"></audio> -->
+    <!-- <form action="">
+        <input type="search" name="num" required="required" placeholder="input a num" autofocus="autofocus" autocomplete="off">
+        <button>submit</button>
+    </form> -->
+
+    <!-- <input type="text" name="" id="" value="num"> -->
+    <!-- <input type="text" name="" id="" class="eee1">
+    <input type="text" name="" id="" class="eee2">
+    <input type="text" name="" id="" class="eee3">
+    <input type="text" name="" id="" class="eee4">
+    <input type="text" name="" id="" class="eee5">
+
+    <input type="text" name="" id="">
+    <input type="password" name="" id=""> -->
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+    </ul>
+</body>
+</html>

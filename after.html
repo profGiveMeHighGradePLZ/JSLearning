@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* div {
+            position: relative;
+            height: 38px;
+            width: 200px;
+            background-color: #eee;
+        }
+        div::after {
+            content: '>';
+            position: absolute;
+            right: 10px;
+            top: 6px;
+            font-size: 18px;
+        } */
+         .bar {
+            width: 170px;
+            height: 15px;
+            border: 1px solid red;
+            border-radius: 7px;
+         }
+         .bar_in {
+            background-color: red;
+            width: 50%;
+            height: 100%;
+            padding: 0.5px;
+
+            transition: width, .7s;
+         }
+         .bar:hover .bar_in {
+            width: 100%;
+         }
+    </style>
+</head>
+<body>
+    <!-- <div>
+
+    </div> -->
+    <div class="bar">
+        <div class="bar_in">
+
+        </div>
+    </div>
+</body>
+</html>

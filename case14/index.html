@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>案例_分类导航</title>
+    <link rel="stylesheet" href="/case14/index.css">
+</head>
+
+<body>
+    <!-- 大容器 -->
+    <div class="container">
+        <div class="sub-list">
+            <div class="item">
+                <h3>分类名字</h3>
+                <ul>
+                    <li>
+                        <a href="javascript:;">
+                            <img
+                                src="http://zhoushugang.gitee.io/erabbit-client-pc-static/uploads/img/category%20(9).png" />
+                            <p>巧克力</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <img
+                                src="http://zhoushugang.gitee.io/erabbit-client-pc-static/uploads/img/category%20(9).png" />
+                            <p>巧克力</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <img
+                                src="http://zhoushugang.gitee.io/erabbit-client-pc-static/uploads/img/category%20(9).png" />
+                            <p>巧克力</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <script>
+        axios({
+            url:'http://hmajax.itheima.net/api/category/top'
+        }).then(result => {
+            const secPromiseList = result.data.data.map(item => {
+                return axios({url: 'http://hmajax.itheima.net/api/category/sub',params:{id:item.id}})
+            })
+            const p = Promise.all(secPromiseList)
+            p.then(result => {
+                const htmlStr = result.map(item => {
+                    const Obj = item.data.data                                                            
+                    return `<h3>${Obj.name}</h3>
+                            <ul>
+                                ${Obj.children.map(i => {
+                                    return `<li>
+                                                <a href="javascript:;">
+                                                <img src="${i.picture}" />
+                                                <p>${i.name}</p>
+                                                </a>
+                                            </li>`
+                                }).join('')}
+                            </ul>`
+                }).join('')
+                // console.log(htmlStr);
+                document.querySelector('.item').innerHTML = htmlStr
+            })
+            
+        })
+   </script>
+</body>
+
+</html>

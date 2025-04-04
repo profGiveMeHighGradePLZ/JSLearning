@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <ul></ul>
+    <script>
+        // const xhr = new XMLHttpRequest()
+        // xhr.open('get','http://hmajax.itheima.net/api/province')
+        // xhr.addEventListener('loadend',()=>{
+        //     console.log(xhr.response);
+        // })      
+        // xhr.send()
+
+        // const pname = '辽宁省'
+        // const cname = '大连市'
+
+        // const Obj = {
+        //     pname,
+        //     cname
+        // }
+
+        // const pObj = new URLSearchParams(Obj)
+        // // console.log(pObj.toString());
+        // const queryString = pObj.toString()
+
+        // const xhr = new XMLHttpRequest()
+        // xhr.open('get',`http://hmajax.itheima.net/api/city?${queryString}`)
+        // xhr.addEventListener('loadend',()=>{
+        //     console.log(xhr.response);
+        //     const data = JSON.parse(xhr.response).list
+        //     console.log(data);
+            
+        //     document.querySelector('ul').innerHTML = data.map((item,index)=>{
+        //         return `<li>${index+1}: ${item}</li>`
+        //     }).join('')
+        // })
+        // xhr.send()
+
+        // const p = new Promise((resolve,reject)=>{
+        //     const xhr = new XMLHttpRequest()
+        //     xhr.open('get','http://hmajax.itheima.net/api/province')
+        //     xhr.addEventListener('loadend',()=>{
+        //         // console.log(xhr);
+        //         if(xhr.status >= 200 & xhr.status < 300){
+        //             resolve(JSON.parse(xhr.response))
+        //         }else{
+        //             reject(new Error(xhr.response))
+        //         }
+        //     })
+        //     xhr.send()
+        // })
+
+        // p.then(result => {
+        //     console.log(result.list);
+        // }).catch(error => {
+        //     console.log(error);
+        // })
+        
+
+        function myAxios(config){
+            return new Promise((resolve,reject) => {
+                const xhr = new XMLHttpRequest()
+                if(config.params){
+                    const Obj = new URLSearchParams(config.params)
+                    const queryString = Obj.toString()
+                    config.url += '?'+queryString
+                }
+                xhr.open(config.method || 'get',config.url)
+                xhr.addEventListener('loadend',()=>{
+                    if(xhr.status >= 200 & xhr.status<300){
+                        resolve(JSON.parse(xhr.response))
+                    }else{
+                        reject(new Error(xhr.response))
+                    }
+                })
+
+                if(config.data){
+                    xhr.setRequestHeader('Content-Type','application/json')
+                    const str = JSON.stringify(config.data)
+                    xhr.send(str)
+                }else{
+                    xhr.send()
+                }
+            })
+        }
+
+        myAxios({
+            url: 'http://hmajax.itheima.net/api/province',
+            params: {
+                pname: '辽宁省'
+            }
+        }).then(result => {
+            console.log(result); 
+        }).catch(error => {
+            console.log(error);
+        })
+
+    </script>
+</body>
+</html>

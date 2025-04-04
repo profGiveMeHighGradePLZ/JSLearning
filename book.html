@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="cmn-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css"> -->
+    <!-- <script src="../bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        table {
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        table th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        caption {
+            text-align: center;
+        }
+
+        table td span {
+            cursor: pointer;
+        }
+
+        .modal-body input {
+            display: block;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>书名</th>
+                <th>作者</th>
+                <th>出版社</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>
+                    <span class="del">删除</span>
+                    <span class="edit">编辑</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- 增加按钮 -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">
+        增加
+    </button>
+
+    <!-- 增加弹窗 -->
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">增加图书</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="bookname" placeholder="书名">
+                    <input type="text" class="author" placeholder="作者">
+                    <input type="text" class="publisher" placeholder="出版社">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary add-btn" data-bs-dismiss="modal">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改弹窗 -->
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">修改图书</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="bookname" placeholder="书名">
+                    <input type="text" class="author" placeholder="作者">
+                    <input type="text" class="publisher" placeholder="出版社">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const creator = 'b'
+        function getBookList(){
+            axios({
+                url:'http://hmajax.itheima.net/api/books',
+                params: {
+                    creator
+                }
+            }).then(result=>{
+                const data = result.data.data
+                // console.log(data);
+                const str = data.map((item,index) => `<tr>
+                <td>${index+1}</td>
+                <td>${item.bookname}</td>
+                <td>${item.author}</td>
+                <td>${item.publisher}</td>
+                <td>
+                    <span class="del">删除</span>
+                    <span class="edit">编辑</span>
+                </td>
+            </tr>`).join('')
+                // console.log(str);
+                document.querySelector('tbody').innerHTML = str
+            })
+        }
+        getBookList()
+
+        const addModalDom = document.querySelector('#add')
+        const addModal = new bootstrap.Modal(addModalDom)
+        document.querySelector('.add-btn').addEventListener('click',()=>{
+            const form = document.querySelector('')
+            addModal.hide()
+        })
+    </script>
+    <script src="https://unpkg.com/form-serialize@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
